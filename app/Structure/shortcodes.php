@@ -22,17 +22,19 @@ use function Logik\Theme\App\template;
  * @param  string $content
  * @return string
  */
-/*function render_button_shortcode($atts, $content)
+function render_button_shortcode($atts, $content)
 {
+    $button_type = get_option( 'button_type' );
+
     $attributes = shortcode_atts([
-        'href' => '#'
+        'href' => '#',
+        'class' => '',
+        'id' => '',
+        'align' => ''
     ], $atts);
 
     ob_start();
-
-    template('shortcodes/button', compact('attributes', 'content'));
-
+        ($button_type) ? template('shortcodes/buttons/type'.$button_type, compact('attributes', 'content')) : template('shortcodes/buttons/type1', compact('attributes', 'content'));
     return ob_get_clean();
 }
 add_shortcode('button', 'Logik\Theme\App\Structure\render_button_shortcode');
-*/
