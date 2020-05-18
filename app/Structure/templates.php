@@ -78,3 +78,20 @@ function render_documentation_button()
 }
 add_action('theme/header/end', 'Logik\Theme\App\Structure\render_documentation_button');
 */
+
+
+function render_header()
+{
+    $header_type = get_option( 'header_type' );
+    ($header_type) ? template("partials/headers/type".$header_type) : template("partials/headers/no-header");
+    
+}
+add_action('theme/structure/header', 'Logik\Theme\App\Structure\render_header');
+
+function render_footer()
+{
+    $header_type = get_option( 'footer_type' );
+    ($header_type) ? template("partials/footers/type".$header_type) : template("partials/footers/no-footer");
+    
+}
+add_action('theme/structure/footer', 'Logik\Theme\App\Structure\render_footer');

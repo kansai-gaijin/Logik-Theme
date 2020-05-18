@@ -26,17 +26,15 @@ function add_theme_menu_item()
 
 add_action("admin_menu", "Logik\Theme\App\Structure\add_theme_menu_item");
 
-function display_twitter_element()
+function display_header_element()
 {
 ?>
-  <input type="text" name="twitter_url" id="twitter_url" value="<?php echo get_option('twitter_url'); ?>" />
-<?php
-}
-
-function display_facebook_element()
-{
-?>
-  <input type="text" name="facebook_url" id="facebook_url" value="<?php echo get_option('facebook_url'); ?>" />
+  <select name="header_type" id="header_type">
+    <option value="0" <?= (get_option('header_type') == 0) ? 'selected' : '' ?>>無し</option>
+    <?php for($i = 1; $i <= 5; $i++): ?>
+      <option value="<?= $i; ?>" <?= (get_option('header_type') == $i) ? 'selected' : '' ?>>Type <?= $i; ?></option>
+    <?php endfor; ?>
+  </select>
 <?php
 }
 
@@ -44,11 +42,9 @@ function display_theme_panel_fields()
 {
   add_settings_section("section", "All Settings", null, "theme-options");
 
-  add_settings_field("twitter_url", "Twitter Profile Url", "Logik\Theme\App\Structure\display_twitter_element", "theme-options", "section");
-  add_settings_field("facebook_url", "Facebook Profile Url", "Logik\Theme\App\Structure\display_facebook_element", "theme-options", "section");
+  add_settings_field("header_type", "ヘッダーの種類", "Logik\Theme\App\Structure\display_header_element", "theme-options", "section");
 
-  register_setting("section", "twitter_url");
-  register_setting("section", "facebook_url");
+  register_setting("section", "header_type");
 }
 
 add_action("admin_init", "Logik\Theme\App\Structure\display_theme_panel_fields");
