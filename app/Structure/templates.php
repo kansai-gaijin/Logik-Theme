@@ -90,8 +90,8 @@ add_action('theme/structure/header', 'Logik\Theme\App\Structure\render_header');
 
 function render_footer()
 {
-    $header_type = get_option( 'footer_type' );
-    ($header_type) ? template("partials/footers/type".$header_type) : template("partials/footers/no-footer");
+    $footer_type = get_option( 'footer_type' );
+    ($footer_type) ? template("partials/footers/type".$footer_type) : template("partials/footers/no-footer");
     
 }
 add_action('theme/structure/footer', 'Logik\Theme\App\Structure\render_footer');
