@@ -62,6 +62,19 @@ function display_button_element()
 <?php
 }
 
+function display_loader_element()
+{
+?>
+  <select name="loader_type" id="loader_type">
+    <option value="0" <?= (get_option('loader_type') == 0) ? 'selected' : '' ?>>無し</option>
+    <?php for($i = 1; $i <= 5; $i++): ?>
+      <option value="<?= $i; ?>" <?= (get_option('loader_type') == $i) ? 'selected' : '' ?>>Type <?= $i; ?></option>
+    <?php endfor; ?>
+  </select>
+<?php
+}
+
+
 function display_theme_panel_fields()
 {
   add_settings_section("section", "All Settings", null, "theme-options");
@@ -69,10 +82,12 @@ function display_theme_panel_fields()
   add_settings_field("header_type", "ヘッダーの種類", "Logik\Theme\App\Structure\display_header_element", "theme-options", "section");
   add_settings_field("footer_type", "フッターの種類", "Logik\Theme\App\Structure\display_footer_element", "theme-options", "section");
   add_settings_field("button_type", "ボタンの種類", "Logik\Theme\App\Structure\display_button_element", "theme-options", "section");
+  add_settings_field("loader_type", "ローダーの種類", "Logik\Theme\App\Structure\display_loader_element", "theme-options", "section");
 
   register_setting("section", "header_type");
   register_setting("section", "footer_type");
   register_setting("section", "button_type");
+  register_setting("section", "loader_type");
 }
 
 add_action("admin_init", "Logik\Theme\App\Structure\display_theme_panel_fields");
